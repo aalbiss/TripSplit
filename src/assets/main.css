@@ -1,3 +1,20 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@layer utilities {
+  .topLavander {
+    border-top-color: #fff2f2;
+  }
+
+  .topSteelBlue {
+    border-top-color: #a9b5df;
+  }
+
+  .topPurple {
+    border-top-color: #7886c7;
+  }
+
+  .topMidnight {
+    border-top-color: #2d336b;
+  }
+}
