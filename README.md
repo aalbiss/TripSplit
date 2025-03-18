@@ -13,7 +13,7 @@ TripSplit is a web app that allows you to split travel expenses with friends, si
 ## Technologies Used
 
 - **Frontend**: Vue 3, Vite, Tailwind CSS
-- **Backend**: Python (Django for data management, if applicable)
+- **Backend**: Python (Flask for data management, if applicable)
 - **Database**: MySQL (for managing expenses and users)
 
 ## Prerequisites
