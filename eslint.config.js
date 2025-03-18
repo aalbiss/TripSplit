@@ -19,6 +19,9 @@ export default [
       globals: {
         ...globals.browser,
       },
+      rules: {
+        'vue/multi-word-component-names': 'off',
+      },
     },
   },
 
