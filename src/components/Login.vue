@@ -1,6 +1,12 @@
+<script>
+import { RouterLink } from 'vue-router'
+</script>
+
 <template>
   <!--Copy from here -->
-  <div class="bg-gradient-to-br min-h-svh flex items-center justify-center p-4">
+  <div
+    class="bg-gradient-to-tl from-LavenderBlush-50 via-LavenderBlush-50 to-LightSteelBlue-200 min-h-svh flex items-center justify-center p-4"
+  >
     <!-- Main Container with Glass Effect -->
     <div class="w-full max-w-md">
       <!-- Logo/Brand Section -->
@@ -9,7 +15,7 @@
           <img
             src="/src/assets/images/Logo.png"
             alt="Logo"
-            class="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg"
+            class="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg rounded-xl"
           />
         </div>
       </div>
@@ -80,22 +86,22 @@
           <!-- Sign In Button -->
           <button
             type="submit"
-            class="w-full bg-MidnightBlue text-white py-3 rounded-xl hover:opacity-90 transition duration-200 transform hover:-translate-y-0.5 shadow-lg hover:shadow-xl"
+            class="w-full bg-MidnightBlue-500 text-white py-3 rounded-xl hover:opacity-90 transition duration-200 transform hover:-translate-y-0.5 shadow-lg hover:shadow-xl"
           >
-            Sign In
+            Accedi
           </button>
         </form>
 
         <!-- Sign Up Link -->
         <p class="flex justify-center items-center text-gray-500 mt-2">Oppure</p>
         <div class="flex justify-center items-center">
-          <a href="#"
+          <RouterLink to="/Signup"
             ><button
               type="submit"
-              class="w-64 bg-MediumPurple text-white py-3 rounded-xl hover:opacity-90 transition duration-200 transform hover:-translate-y-0.5 shadow-lg hover:shadow-xl"
+              class="w-64 bg-MediumPurple-500 text-white py-3 rounded-xl hover:opacity-90 transition duration-200 transform hover:-translate-y-0.5 shadow-lg hover:shadow-xl"
             >
-              Sign Up
-            </button></a
+              Registrati
+            </button></RouterLink
           >
         </div>
       </div>
