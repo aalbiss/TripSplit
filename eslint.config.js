@@ -20,6 +20,9 @@ export default [
         ...globals.browser,
       },
     },
+    rules: {
+      'vue/multi-word-component-names': 'off',
+    },
   },
 
   js.configs.recommended,
