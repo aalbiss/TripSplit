@@ -8,13 +8,13 @@ const navbarHeight = computed(() => {
 })
 </script>
 
-
-<template><nav
+<template>
+  <nav
     class="fixed top-0 left-0 w-full border-b-2 border-gray-400 flex items-center justify-center"
     :class="navbarHeight"
   >
-    <ul class="flex justify-around px-8 items-center w-full max-w-lg">
-      <!-- Icona utenti -->
+    <ul class="flex justify-between items-center w-full max-w-lg px-8">
+      <!-- Icona utenti (Annulla) -->
       <li>
         <a
           href="#"
@@ -24,12 +24,14 @@ const navbarHeight = computed(() => {
         </a>
       </li>
 
-      <!-- Pulsante centrale con effetto floating -->
-      <li class="relative flex flex-col items-center text-gray-700 hover:text-gray-500 transition-all duration-300 focus:outline-none active:text-gray-700" >
+      <!-- Pulsante centrale con effetto floating (Crea Gruppo) -->
+      <li
+        class="relative flex flex-col items-center text-gray-700 hover:text-gray-500 transition-all duration-300 focus:outline-none active:text-gray-700"
+      >
         <p>Crea Gruppo</p>
       </li>
 
-      <!-- Icona profilo -->
+      <!-- Icona profilo (Fatto) -->
       <li>
         <a
           href="#"
@@ -41,7 +43,7 @@ const navbarHeight = computed(() => {
     </ul>
   </nav>
 </template>
-
+s
 
 <!-- <script setup>
 import { computed } from 'vue'

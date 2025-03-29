@@ -22,18 +22,34 @@ const router = createRouter({
       path: '/start',
       name: 'Start',
       component: StartView,
+      meta: { requiresAuth: true },
     },
     {
-      path: '/createGroup',
+      path: '/creategroup',
       name: 'CreateGroup',
       component: CreateGroupView,
+      meta: { requiresAuth: true },
     },
     {
       path: '/prova',
       name: 'Prova',
       component: Prova,
+      meta: { requiresAuth: true },
     },
   ],
+})
+
+router.beforeEach((to, from, next) => {
+  const isAuthenticated = localStorage.getItem('authToken') // or use Vuex/store to manage the auth status
+
+  // If the route requires authentication and the user is not logged in
+  if (to.meta.requiresAuth && !isAuthenticated) {
+    // Redirect to landing page or login page
+    next({ name: 'LandingPage' })
+  } else {
+    // Proceed with the navigation
+    next()
+  }
 })
 
 export default router

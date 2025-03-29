@@ -1,5 +1,41 @@
-<script>
+<script setup>
 import { RouterLink } from 'vue-router'
+
+import { ref } from 'vue'
+import axios from 'axios'
+import router from '@/router'
+
+const email = ref('')
+const password = ref('')
+
+const login = async () => {
+  try {
+    const response = await axios.post('http://192.168.1.118:8080/api/auth/login', {
+      email: email.value,
+      password: password.value,
+    })
+    console.log(response.data)
+
+    const firstLoginResponse = await axios.get('http://192.168.1.118:8080/api/auth/first-login', {
+      params: { email: email.value },
+    })
+    localStorage.setItem('authToken', response.data.token)
+    const firstLogin = firstLoginResponse.data
+
+    if (firstLogin) {
+      router.push('/start')
+    } else {
+      router.push('/prova')
+    }
+  } catch (error) {
+    if (error.response) {
+      alert(error.response.data)
+      console.error('Error response:', error.response.data)
+    } else {
+      console.error('Unexpected error:', error)
+    }
+  }
+}
 </script>
 
 <template>
@@ -29,7 +65,7 @@ import { RouterLink } from 'vue-router'
           <p class="text-gray-500 mt-2">Accedi per continuare</p>
         </div>
 
-        <form class="space-y-6">
+        <form @submit.prevent="login" class="space-y-6">
           <!-- Email Input -->
           <div class="relative">
             <label class="block text-gray-700 text-sm font-medium mb-2" for="email"> Email </label>
@@ -42,6 +78,7 @@ import { RouterLink } from 'vue-router'
                 type="email"
                 id="email"
                 placeholder="Inserisci email"
+                v-model="email"
                 required
               />
             </div>
@@ -61,6 +98,7 @@ import { RouterLink } from 'vue-router'
                 type="password"
                 id="password"
                 placeholder="Inserisci password"
+                v-model="password"
                 required
               />
             </div>
@@ -95,7 +133,7 @@ import { RouterLink } from 'vue-router'
         <!-- Sign Up Link -->
         <p class="flex justify-center items-center text-gray-500 mt-2">Oppure</p>
         <div class="flex justify-center items-center">
-          <RouterLink to="/Signup"
+          <RouterLink to="/signup"
             ><button
               type="submit"
               class="w-64 bg-MediumPurple-500 text-white py-3 rounded-xl hover:opacity-90 transition duration-200 transform hover:-translate-y-0.5 shadow-lg hover:shadow-xl"

@@ -1,13 +1,40 @@
 <script setup>
 import { RouterLink } from 'vue-router'
+
+import { ref } from 'vue'
+import axios from 'axios'
+
+const name = ref('')
+const surname = ref('')
+const email = ref('')
+const password = ref('')
+
+const signup = async () => {
+  try {
+    const response = await axios.post('http://192.168.1.118:8080/api/auth/signup', {
+      name: name.value,
+      surname: surname.value,
+      email: email.value,
+      password: password.value,
+    })
+    alert('Registrazione avvenuta con successo!')
+    console.log(response.data)
+  } catch (error) {
+    if (error.response) {
+      alert(error.response.data)
+      console.error('Error response:', error.response.data)
+    } else {
+      console.error('Unexpected error:', error)
+    }
+  }
+}
 </script>
 
 <template>
-  <!--Copy from here -->
   <div
     class="bg-gradient-to-tl from-LavenderBlush-50 via-LavenderBlush-50 to-LightSteelBlue-200 min-h-svh flex items-center justify-center p-4"
   >
-    <!-- Main Container with Glass Effect -->
+    <!-- Main Container -->
     <div class="w-full max-w-md">
       <!-- Logo/Brand Section -->
       <div class="text-center mb-8">
@@ -28,7 +55,7 @@ import { RouterLink } from 'vue-router'
           <h2 class="text-3xl text-black">Registrati</h2>
         </div>
 
-        <form class="space-y-5">
+        <form @submit.prevent="signup" class="space-y-5">
           <!-- Name Input -->
           <div class="relative">
             <label class="block text-gray-700 text-sm font-medium mb-1" for="nome"> Nome </label>
@@ -39,14 +66,15 @@ import { RouterLink } from 'vue-router'
               <input
                 class="w-full pl-10 pr-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-white/50"
                 type="text"
-                id="nome"
+                v-model="name"
+                id="name"
                 placeholder="Inserisci nome"
                 required
               />
             </div>
           </div>
 
-          <!-- Cognome Input -->
+          <!-- Surname Input -->
           <div class="relative">
             <label class="block text-gray-700 text-sm font-medium mb-1" for="cognome">
               Cognome
@@ -58,7 +86,8 @@ import { RouterLink } from 'vue-router'
               <input
                 class="w-full pl-10 pr-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-white/50"
                 type="text"
-                id="cognome"
+                v-model="surname"
+                id="surname"
                 placeholder="Inserisci cognome"
                 required
               />
@@ -75,6 +104,7 @@ import { RouterLink } from 'vue-router'
               <input
                 class="w-full pl-10 pr-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-white/50"
                 type="email"
+                v-model="email"
                 id="email"
                 placeholder="Inserisci email"
                 required
@@ -94,12 +124,15 @@ import { RouterLink } from 'vue-router'
               <input
                 class="w-full pl-10 pr-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-white/50"
                 type="password"
+                v-model="password"
                 id="password"
                 placeholder="Inserisci password"
                 required
               />
             </div>
           </div>
+
+          <!-- Button -->
           <div class="flex justify-center items-center">
             <button
               type="submit"
@@ -108,6 +141,8 @@ import { RouterLink } from 'vue-router'
               Sign Up
             </button>
           </div>
+
+          <!-- Return to login -->
           <RouterLink
             to="/"
             class="text-sm text-blue-600 hover:text-blue-800 font-medium transition-colors duration-200 flex justify-center items-center mt-2"
