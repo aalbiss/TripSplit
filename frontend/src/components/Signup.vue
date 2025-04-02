@@ -11,7 +11,7 @@ const password = ref('')
 
 const signup = async () => {
   try {
-    const response = await axios.post('http://192.168.1.118:8080/api/auth/signup', {
+    const response = await axios.post('http://localhost:8080/api/auth/signup', {
       name: name.value,
       surname: surname.value,
       email: email.value,

@@ -10,13 +10,13 @@ const password = ref('')
 
 const login = async () => {
   try {
-    const response = await axios.post('http://192.168.1.118:8080/api/auth/login', {
+    const response = await axios.post('http://localhost:8080/api/auth/login', {
       email: email.value,
       password: password.value,
     })
     console.log(response.data)
 
-    const firstLoginResponse = await axios.get('http://192.168.1.118:8080/api/auth/first-login', {
+    const firstLoginResponse = await axios.get('http://localhost:8080/api/auth/first-login', {
       params: { email: email.value },
     })
     localStorage.setItem('authToken', response.data.token)
