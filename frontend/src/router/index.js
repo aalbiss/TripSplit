@@ -40,14 +40,15 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  const isAuthenticated = localStorage.getItem('authToken') // or use Vuex/store to manage the auth status
-
-  // If the route requires authentication and the user is not logged in
-  if (to.meta.requiresAuth && !isAuthenticated) {
-    // Redirect to landing page or login page
+  const isAuthenticated = localStorage.getItem('authToken')
+  //TODO: change router
+  if (isAuthenticated && to.name === 'LandingPage') {
+    //If user is logged in and open the website, is sent to CreateGroup
+    next({ name: 'CreateGroup' })
+  } else if (to.meta.requiresAuth && !isAuthenticated) {
+    //If not logged in redirect to home page/login
     next({ name: 'LandingPage' })
   } else {
-    // Proceed with the navigation
     next()
   }
 })
